@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  dbt:
+    build:
+      context: ./dbt
+    volumes:
+      - ./dbt/jaffle_shop:/app
+    networks:
+      - my_network
+
+  dagster:
+    build:
+      context: ./dagster
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dagster/my_dagster_project:/app
+    depends_on:
+      - dbt
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
