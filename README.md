@@ -1,4 +1,4 @@
-# dbt_dagster_starter
+# dbt_dagster_starter⭐️
 
 以下のように、BigQuery用の環境変数設定例を追加してコメントアウトしました。
 
