@@ -90,9 +90,4 @@ GitHub ActionsでのCI/CDを設定しています。
 - [dbt Labsの公式ドキュメント](https://docs.getdbt.com/)
 - [Dagsterの公式ドキュメント](https://docs.dagster.io/)
 
-以上の手順で、dbtとDagsterのプロジェクトをローカル環境で構築し、本番環境でのデプロイも視野に入れて設定が可能です。
-```
 
---- 
-
-これで、SnowflakeとBigQueryの両方の環境変数設定例が含まれたREADMEになります。
