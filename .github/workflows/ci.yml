@@ -1,0 +1,46 @@
+
+#### 7. `.github/workflows/ci.yml` (GitHub Actionsワークフロー)
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      dbt:
+        image: python:3.8-slim
+        options: >-
+          --mount type=bind,source=${{ github.workspace }}/dbt/jaffle_shop,target=/app
+        env:
+          DBT_PROFILES_DIR: /app/.dbt
+      dagster:
+        image: python:3.8-slim
+        options: >-
+          --mount type=bind,source=${{ github.workspace }}/dagster/my_dagster_project,target=/app
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install Dependencies
+      run: |
+        pip install dbt-bigquery dagster-dbt dbt-osmosis
+
+    - name: Run dbt tests
+      run: |
+        dbt debug --profiles-dir /app/.dbt
+        dbt test --profiles-dir /app/.dbt
