@@ -1,0 +1,8 @@
+# セキュリティ関連
+dbt/jaffle_shop/.dbt/profiles.yml
+.env
+
+# その他
+__pycache__/
+*.pyc
+*.log
