@@ -2,6 +2,10 @@
 
 このリポジトリでは、dbtとDagsterを組み合わせてデータ処理パイプラインを構築する方法を紹介しています。
 
+# My Project
+
+このリポジトリでは、dbtとDagsterを組み合わせてデータ処理パイプラインを構築する方法を紹介しています。
+
 ## セットアップ手順
 
 ### 前提条件
@@ -24,18 +28,16 @@
    ```
 
 3. **Dagsterプロジェクトの準備**  
-   Dagster用のプロジェクトをスキャフォールドします。
+   Dagster用のプロジェクトをスキャフォールドします。Dagsterのプロジェクトは`dagster`ディレクトリ内に作成します。
    ```bash
    cd ../../dagster
-   dagster-dbt project scaffold --project-name my_dagster_project
+   dagster-dbt project scaffold --project-name my_dagster_project --dbt-project-dir ../dbt/jaffle_shop
    ```
 
 4. **環境変数の設定**  
    プロジェクトルートに`.env`ファイルを作成し、必要な認証情報を追加します。
    ```bash
    # .envファイルの例
-
-   # Snowflake認証情報
    SNOWFLAKE_ACCOUNT=your_account
    SNOWFLAKE_USER=your_user
    SNOWFLAKE_PASSWORD=your_password
@@ -43,15 +45,12 @@
    SNOWFLAKE_WAREHOUSE=your_warehouse
    SNOWFLAKE_DATABASE=your_database
    SNOWFLAKE_SCHEMA=your_schema
-
-   # BigQuery認証情報（利用する場合はコメントを外してください）
-   # BIGQUERY_PROJECT=your_project_id
-   # BIGQUERY_DATASET=your_dataset
-   # BIGQUERY_KEYFILE_PATH=/path/to/your/keyfile.json
    ```
 
-5. **Docker Composeによるコンテナのビルドと起動**
+5. **Docker Composeによるコンテナのビルドと起動**  
+   プロジェクトのルートディレクトリに戻り、以下のコマンドを実行します。
    ```bash
+   cd ../..    # プロジェクトのルートディレクトリへ戻る
    docker-compose up --build
    ```
 
@@ -81,4 +80,4 @@ GitHub ActionsでのCI/CDを設定しています。
 - [dbt Labsの公式ドキュメント](https://docs.getdbt.com/)
 - [Dagsterの公式ドキュメント](https://docs.dagster.io/)
 
-
+以上の手順で、dbtとDagsterのプロジェクトをローカル環境で構築し、本番環境でのデプロイも視野に入れて設定が可能です。
